@@ -6,6 +6,7 @@ const Form = (props) => {
     const [eTitle, setETitle] =  useState("");
     const [pTitle, setPTitle] =  useState("");
     const [cPTitle, setCpTitle] =  useState("");
+    const [hasBeenSubmitted, setHasBeenSubmitted] =  useState(false);
 
     const handleFirstName = (e)=>{
         setState({...state, 'firstName': e.target.value});
@@ -49,6 +50,17 @@ const Form = (props) => {
             setCpTitle("");
         }
     }  
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        setHasBeenSubmitted(true);
+    }  
+    const formMessage = ()=>{
+        if (hasBeenSubmitted ){
+            return""
+        }else{
+            setCpTitle("");
+        }
+    }  
 
     return(
         <form>
@@ -87,9 +99,11 @@ const Form = (props) => {
                     <p style={{color:'red'}}> {cPTitle}</p>
                 }
             </div>
-            <input type="submit" value="Register"/>
+            <input type="submit" value="Register" onClick={handleSubmit}/>
+           
         </form>
     );
 }
+
 
 export default Form;
